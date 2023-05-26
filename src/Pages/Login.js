@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useContext, useState } from 'react';
+// import { FinNav } from '../Components';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../Context/AppContext';
+
 
 const Login = () => {
+const {isLoggedIn, setIsLoggedIn,userInfo,setUserInfo} = useContext(AppContext)
+const [errorMessage, setErrorMessage] = useState([]) ; 
+const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,13 +25,22 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('/api/login', formData)
+      .post('http://localhost:4000/api/v1/login', formData)
       .then((response) => {
-        // Handle successful response
-        console.log(response.data);
+       
+        console.log(response.data.user);
+      
+        if (response.data.success){
+            setIsLoggedIn(true)
+            setUserInfo(response.data.user)
+            navigate('/')
+
+           
+        }
       })
       .catch((error) => {
         // Handle error
+            setErrorMessage(error.response.data.message)
         console.error(error);
       });
   };
@@ -70,6 +86,8 @@ const Login = () => {
           >
             Log in
           </button>
+          <div>{errorMessage}</div>
+       
         </form>
       </div>
     </div>

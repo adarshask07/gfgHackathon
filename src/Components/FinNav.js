@@ -10,7 +10,10 @@ import {
 import { AppContext } from "../Context/AppContext";
 
 export default function FinNav() {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+
+  
+  const { isLoggedIn, setIsLoggedIn,userInfo } = useContext(AppContext);
+
 
   const [openNav, setOpenNav] = useState(false);
 
@@ -80,7 +83,7 @@ export default function FinNav() {
         className="p-1 font-normal"
       >
         <a href="/ResultPage" className="flex items-center">
-          result
+          {userInfo.name}
         </a>
       </Typography>
     </ul>
@@ -99,9 +102,10 @@ export default function FinNav() {
         </Typography>
         <div className="hidden lg:block">{navList}</div>
         <div>
-          {!isLoggedIn && <Button variant="gradient" size="sm" className="hidden lg:inline-block">
+          {!isLoggedIn && 
+          <a variant="gradient" size="sm" href= "/login" className="hidden bg-blue-700 py-3 px-6 rounded-xl lg:inline-block">
             <span>Login</span>
-          </Button>
+          </a>
           }
           {
             isLoggedIn &&

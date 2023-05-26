@@ -6,7 +6,7 @@ export const AppContext = createContext();
 
 export default function AppContextProvider({children}) {
     const [loading, setLoading] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true) ;
+    const [isLoggedIn, setIsLoggedIn] = useState(false) ;
     const [riskFactors, setRiskFactors] = useState([]);
     const [selectedRiskFactors, setSelectedRiskFactors] = useState([]);
     const [expenseRatio, setExpenseRatio] = useState(1);
@@ -16,6 +16,7 @@ export default function AppContextProvider({children}) {
     const [cagrThreeYear, setCagrThreeYear] = useState([10, 20]);
     const [sipAmount, setSipAmount] = useState(5000);
     const [fundData, setFundData] = useState(finalDataMF)
+    const [userInfo, setUserInfo] =useState([])
     const [userInput, setUserInput] = useState({
         expenseRatio: null,
         exitLoad: null,
@@ -51,7 +52,8 @@ export default function AppContextProvider({children}) {
         cagrThreeYear,setCagrThreeYear,
         sipAmount,setSipAmount,
         userInput, setUserInput,
-        fundData, setFundData
+        fundData, setFundData,
+        userInfo, setUserInfo
 
     };
 
