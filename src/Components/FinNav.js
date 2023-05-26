@@ -30,7 +30,7 @@ export default function FinNav() {
           Home
         </a>
       </Typography>
-      <Typography
+     {  isLoggedIn && <Typography
         as="li"
         variant="small"
         color="white"
@@ -40,6 +40,7 @@ export default function FinNav() {
           Score
         </a>
       </Typography>
+}
       <Typography
         as="li"
         variant="small"
@@ -50,17 +51,18 @@ export default function FinNav() {
           Calculators
         </a>
       </Typography>
-      <Typography
+     {isLoggedIn && <Typography
         as="li"
         variant="small"
         color="white"
         className="p-1 font-normal"
       >
         <a href="/RecommendationPageUserInfo" className="flex items-center">
-          Recommendation Page
+          Recommendation Me
         </a>
       </Typography>
-      <Typography
+    }
+    { isLoggedIn && <Typography
         as="li"
         variant="small"
         color="white"
@@ -70,6 +72,7 @@ export default function FinNav() {
           userInput
         </a>
       </Typography>
+}
       <Typography
         as="li"
         variant="small"

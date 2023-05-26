@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import axios from 'axios'
+import { AppContext } from '../Context/AppContext';
+
+
 
 const LoginPage = () => {
+    const {isLoggedIn, setIsLoggedIn}= useContext(AppContext)
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    registrationType: 'user',
+    role: 'user',
   });
 
   const handleInputChange = (e) => {
@@ -19,16 +25,21 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData)
-    // axios
-    //   .post('/api/login', formData)
-    //   .then((response) => {
-    //     // Handle successful response
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     // Handle error
-    //     console.error(error);
-    //   });
+    axios
+      .post('http://localhost:4000/api/v1/signup', formData)
+      .then((response) => {
+        
+        // Handle successful response
+        if(response.data.success) {
+            setIsLoggedIn(true)
+
+             }
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error(error);
+      });
   };
 
   return (
@@ -93,7 +104,7 @@ const LoginPage = () => {
               onChange={handleInputChange}
             >
               <option value="user">User</option>
-              <option value="company">Company</option>
+            
             </select>
           </div>
           <button

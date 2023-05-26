@@ -1,96 +1,79 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
-import { LockClosedIcon, UserCircleIcon } from '@heroicons/react/outline';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const [showPassword, setShowPassword] =useState(false);
-    const [loggedIn, setLoggedIn] = useState(false) ; 
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-    return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-900">
-            <div className="max-w-md w-full px-6 py-8 bg-gray-800 shadow-lg rounded-lg">
-                <div className="flex justify-center items-center">
-                    <span className="text-2xl font-medium text-white">Login</span>
-                </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
-                    <div className="relative">
-                        <div className="inline-flex items-center justify-center absolute top-0 left-0 h-full w-10 text-gray-400">
-                            <UserCircleIcon className="h-6 w-6" />
-                        </div>
-                        <input
-                            type="text"
-                            {...register("username", { required: true })}
-                            className="text-gray-200 w-full pl-12 pr-3 py-2 rounded-lg bg-gray-700 focus:outline-none focus:shadow-outline focus:border-indigo-500"
-                            placeholder="Username"
-                        />
-                    </div>
-                    {errors.username && <span className="text-red-500">This field is required</span>}
-                    <div className="relative">
-                        <div className="inline-flex items-center justify-center absolute top-0 left-0 h-full w-10 text-gray-400">
-                            <LockClosedIcon className="h-6 w-6" />
-                        </div>
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            {...register("password", { required: true })}
-                            className="text-gray-200 w-full pl-12 pr-3 py-2 rounded-lg bg-gray-700 focus:outline-none focus:shadow-outline focus:border-indigo-500"
-                            placeholder="Password"
-                        />
-                        <div className="inline-flex items-center justify-center absolute top-0 right-0 h-full w-10">
-                            {showPassword ? (
-                                <EyeOffIcon
-                                    className="h-6 w-6 text-gray-400 cursor-pointer"
-                                    onClick={() => setShowPassword(false)}
-                                />
-                            ) : (
-                                <EyeIcon
-                                    className="h-6 w-6 text-gray-400 cursor-pointer"
-                                    onClick={() => setShowPassword(true)}
-                                />
-                            )}
-                        </div>
-                    </div>
-                    {errors.password && <span className="text-red-500">This field is required</span>}
-                    <div>
-                        <button
-                            type="submit"
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Login
-                        </button>
-                    </div>
-                </form>
-                <div className="flex justify-between items-center mt-4">
-                    <span>    </span>
-                    <Link
-                        to="/forgot-password"
-                        className="text-sm font-medium text-indigo-500 hover:text-indigo-400"
-                    >
-                        Forgot Password?
-                    </Link>
-                </div>
-                <div className="flex justify-center items-center mt-4">
-                    <span className="text-gray-400 mr-2">Don't have an account?</span>
-                    <Link
-                        to="/"
-                        className="text-sm font-medium text-indigo-500 hover:text-indigo-400"
-                    >
-                        Register
-                    </Link>
-                </div>
-            </div>
-        </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post('/api/login', formData)
+      .then((response) => {
+        // Handle successful response
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error(error);
+      });
+  };
 
-    );
+  return (
+    <div className="flex items-center justify-center h-screen bg-gray-900">
+      <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-semibold text-white mb-6">Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-white mb-2" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-3 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-white mb-2" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-3 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <button
+            className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Log in
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
-
