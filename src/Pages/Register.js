@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../Context/AppContext';
+import { toast } from 'react-toastify';
 
 
 
@@ -32,6 +33,7 @@ const Register = () => {
         // Handle successful response
         if(response.data.success) {
             setIsLoggedIn(true)
+            toast.success("Registered Successfully")
 
              }
         console.log(response.data);

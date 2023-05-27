@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios'
 import { AppContext } from '../Context/AppContext';
+import { toast } from 'react-toastify';
 
 
 
@@ -33,12 +34,14 @@ const RegisterCompany = () => {
         // Handle successful response
         if(response.data.success) {
             setIsLoggedIn(true)
+            toast.success("Registered Successfully")
             
 
              }
         console.log(response.data);
       })
       .catch((error) => {
+        toast.error("Error") ; 
         // Handle error
         console.error(error);
       });

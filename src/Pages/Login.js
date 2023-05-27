@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { AppContext } from '../Context/AppContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const { setIsLoggedIn, setUserInfo } = useContext(AppContext);
@@ -32,7 +33,9 @@ const Login = () => {
           setUserInfo(response.data.user);
           localStorage.setItem('token', response.data.user.token);
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          toast.success('Login successful');
           navigate('/');
+
           // Include the token in the request headers for subsequent requests
         
         }
@@ -40,6 +43,7 @@ const Login = () => {
       .catch((error) => {
         // Handle error
         setErrorMessage(error.response.data.message);
+        toast.error(error.response.data.message);
         console.error(error);
       });
   };

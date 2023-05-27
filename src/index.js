@@ -6,6 +6,8 @@ import "./index.css";
 import { ThemeProvider } from "@material-tailwind/react";
 import { BrowserRouter } from "react-router-dom";
 import AppContextProvider from "./Context/AppContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -15,6 +17,7 @@ root.render(
     <ThemeProvider>
       <AppContextProvider>
         <App />
+        <ToastContainer />
       </AppContextProvider>
 
     </ThemeProvider>
