@@ -8,6 +8,7 @@ const ResultCard = (props) => {
     <div>{fund.fundName}</div>
     <div>{fund.fundScore}</div>
     <div>{fund.fundId}</div>
+    <div>{fund.username}</div>
 
     </div>
    

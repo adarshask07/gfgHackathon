@@ -17,6 +17,8 @@ export default function AppContextProvider({children}) {
     const [sipAmount, setSipAmount] = useState(5000);
     const [fundData, setFundData] = useState(finalDataMF)
     const [userInfo, setUserInfo] =useState([])
+    const [companyInfo, setCompanyInfo] = useState([])
+    const [isCompanyLoggedIn,setIsCompanyLoggedIn] = useState(false)
     const [userInput, setUserInput] = useState({
         expenseRatio: null,
         exitLoad: null,
@@ -53,7 +55,10 @@ export default function AppContextProvider({children}) {
         sipAmount,setSipAmount,
         userInput, setUserInput,
         fundData, setFundData,
-        userInfo, setUserInfo
+        userInfo, setUserInfo,
+        companyInfo, setCompanyInfo,
+        isCompanyLoggedIn,setIsCompanyLoggedIn
+        
 
     };
 

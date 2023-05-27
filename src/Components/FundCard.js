@@ -1,5 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
+import { AppContext } from '../Context/AppContext';
+
 
 import { CheckIcon } from "@heroicons/react/24/outline";
 import {
@@ -12,9 +14,13 @@ import {
 } from "@material-tailwind/react";
    
   export default function FundCard(props) {
-    const userId =1 
+    const {userInfo} = useContext(AppContext)
+    
+    
+  
     const fund = props.fund 
     const fundId = fund.fundId
+    
     const [timeSpent, setTimeSpent] = useState(0);
     const [isAddedToWatchList, setIsAddedToWatchList] = useState(0);
     const [hasClickedMoreInfo, setHasClickedMoreInfo] = useState(0);
@@ -47,14 +53,15 @@ import {
     }
 
     function calculateUserBehaviorScoreForFund(
-      userId , 
       timeSpent,
-      fundId,
+      fund, 
       isAddedToWatchList,
       hasClickedMoreInfo,
       hasSharedOnSocialMedia,
       hasHovered,
-      hasDownloadedDocument
+      hasDownloadedDocument, 
+      userInfo
+    
     ) {
 
       const timeSpentWeight = 0.3;
@@ -82,24 +89,31 @@ import {
       const userBehaviorScore = timeSpentScore + watchListScore + moreInfoScore + socialMediaScore + hoverScore + documentDownloadScore
       console.log(timeSpentScore + "watchList " + watchListScore + "moreInfo " + moreInfoScore + "Social Media Score " + socialMediaScore + "Hover Score" + hoverScore + "Doc Download" + documentDownloadScore)
     
-      // console.log(userBehaviorScore)
+      // console.log(userInfo.e)
     
       return {
-        userId: userId,
-        fundId: fundId,
-        fundScore: userBehaviorScore,
+        username: userInfo.name, 
+        userEmail: userInfo.email,
+        companyId: fund.companyId,
+        fundId: fund.fundId, 
+        fundScore: userBehaviorScore
+
       };
-    }
+    } 
 
 
     
     function updateFundScore(fundScores) {
   
       const updatedData = {
-        userId: fundScores.userId,
+        // userId: fundScores.userId,
         fundId: fundScores.fundId,
-        fundScore: fundScores.fundScore
+        fundScore: fundScores.fundScore, 
+        username : userInfo.name,
+        email: userInfo.email, 
+        companyId:fund.companyId
       };
+      console.log(updatedData)
   
       // Send the updated fund score data to the server
       axios.post('http://localhost:4000/api/v1/createFundScore', updatedData)
@@ -117,14 +131,15 @@ import {
   
     useEffect(() => {
       const fundScore = calculateUserBehaviorScoreForFund(
-        userId,
+        // userId,
         timeSpent,
-        fund.fundId,
+        fund, 
         isAddedToWatchList,
         hasClickedMoreInfo,
         hasSharedOnSocialMedia,
         hasHovered,
-        hasDownloadedDocument
+        hasDownloadedDocument, 
+        userInfo
       );
       if (fundScore.fundScore!==0){
         setFundScores(fundScore);
@@ -159,7 +174,7 @@ import {
     return (
 
       <Card color="blue" variant="gradient" onMouseEnter={hovered}  className="w-full max-w-[20rem] p-8">
-        
+        {/* {conso)} */}
         <CardHeader
           floated={false}
           shadow={false}

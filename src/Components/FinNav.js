@@ -8,11 +8,26 @@ import {
   Typography
 } from "@material-tailwind/react";
 import { AppContext } from "../Context/AppContext";
+import { useNavigate } from "react-router-dom";
+
 
 export default function FinNav() {
+  const {setIsLoggedIn,isCompanyLoggedIn,setUserInfo, setCompanyInfo,setIsCompanyLoggedIn,isLoggedIn,userInfo} = useContext(AppContext)
+  const navigate = useNavigate ()
+
+  function logout() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('companyToken')
+    setIsLoggedIn(false)
+    setIsCompanyLoggedIn(false)
+    setUserInfo([])
+    setCompanyInfo([])
+    navigate('/')
+  
+  }
 
   
-  const { isLoggedIn, setIsLoggedIn,userInfo } = useContext(AppContext);
+ 
 
 
   const [openNav, setOpenNav] = useState(false);
@@ -23,17 +38,30 @@ export default function FinNav() {
 
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="white"
-        className="p-1 font-normal"
-      >
-        <a href="/" className="flex items-center">
-          Home
-        </a>
-      </Typography>
-     {  isLoggedIn && <Typography
+         {  <Typography
+              as="li"
+              variant="small"
+              color="white"
+              className="p-1 font-normal"
+            >
+              <a href="/" className="flex items-center">
+                Home
+              </a>
+            </Typography>
+}
+
+{ isCompanyLoggedIn && !isLoggedIn &&  <Typography
+              as="li"
+              variant="small"
+              color="white"
+              className="p-1 font-normal"
+            >
+              <a href="/Dashboard" className="flex items-center">
+                Dashboard
+              </a>
+            </Typography>
+}
+     {  isCompanyLoggedIn && <Typography
         as="li"
         variant="small"
         color="white"
@@ -60,8 +88,8 @@ export default function FinNav() {
         color="white"
         className="p-1 font-normal"
       >
-        <a href="/RecommendationPageUserInfo" className="flex items-center">
-          Recommendation Me
+        <a href="/filter" className="flex items-center">
+          Recommend Me
         </a>
       </Typography>
     }
@@ -102,19 +130,22 @@ export default function FinNav() {
         </Typography>
         <div className="hidden lg:block">{navList}</div>
         <div>
-          {!isLoggedIn && 
+          {!isLoggedIn &&
           <a variant="gradient" size="sm" href= "/login" className="hidden bg-blue-700 py-3 px-6 rounded-xl lg:inline-block">
             <span>Login</span>
           </a>
           }
           {
-            isLoggedIn &&
+            isLoggedIn  &&
+            <a variant="gradient" size="sm" href= "/login" onClick={logout} className="hidden bg-blue-700 py-3 px-6 rounded-xl lg:inline-block">
+            <span>Logout</span>
+            </a>
 
-
-            <div></div>
+           
 
 
           }
+          
         </div>
         <IconButton
           variant="text"

@@ -11,27 +11,37 @@ import SipCalculator from "./Components/Calculators/SipCalculator";
 import FinNav from "./Components/FinNav";
 import Calculators from "./Pages/Calculators";
 import Home from "./Pages/Home";
-import RecommendationPageUserInfo from "./Pages/RecommendationPageUserInfo";
 import Login from "./Pages/Login";
+import RecommendationPageUserInfo from "./Pages/RecommendationPageUserInfo";
 import Register from "./Pages/Register";
 import UserInput from "./Pages/UserInput";
 import "./style.js";
 
+import FilterPage from "./Pages/FilterPage";
 import ResultPage from "./Pages/ResultPage.js";
 import ScoreWithCard from "./Pages/ScoreWithCard.js";
-
+import LoginCompany from "./Pages/LoginCompany";
+import RegisterCompany from "./Pages/RegisterCompany";
+import DashBoardCompany from "./Pages/DashBoardCompany";
+import { AppContext } from "./Context/AppContext";
+import { useContext } from "react";
 
 function App() {
   const [model, setModel] = useState(null) ;
+  const {isCompanyLoggedIn} = useContext(AppContext)
+  
+  
+  
+
 
   
 
   return (
-  <div className="w-full bg-black h-full" >
-    <div className=" mb-5 top-2 sticky z-10">
-    <FinNav/>
+    <div  div className="w-full bg-black h-full" >
+   {  !isCompanyLoggedIn  && <div className=" mb-5 top-2 sticky z-10">
+                              <FinNav/>
     
-    </div>
+                           </div>}
     
    
 
@@ -52,6 +62,10 @@ function App() {
       <Route path="/ResultPage" element={<ResultPage/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
       <Route path="/register" element={<Register/>}></Route>
+      <Route path="/filter" element={<FilterPage/>}></Route>
+      <Route path ="/loginCompany" element={<LoginCompany/>}></Route>
+      <Route path ="/registerCompany" element={<RegisterCompany/>}></Route>
+      <Route path="/Dashboard" element={<DashBoardCompany/>}></Route>
      
 
     </Routes>

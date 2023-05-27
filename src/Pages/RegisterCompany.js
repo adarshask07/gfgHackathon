@@ -1,17 +1,18 @@
-import axios from 'axios';
 import React, { useContext, useState } from 'react';
+import axios from 'axios'
 import { AppContext } from '../Context/AppContext';
 
 
 
-const Register = () => {
+const RegisterCompany = () => {
     const {isLoggedIn, setIsLoggedIn}= useContext(AppContext)
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    role: 'user',
+    companyId:'' ,
+    role: 'admin',
   });
 
   const handleInputChange = (e) => {
@@ -26,12 +27,13 @@ const Register = () => {
     e.preventDefault();
     console.log(formData)
     axios
-      .post('http://localhost:4000/api/v1/signup', formData)
+      .post('http://localhost:4000/api/v1/signupcompany', formData)
       .then((response) => {
         
         // Handle successful response
         if(response.data.success) {
             setIsLoggedIn(true)
+            
 
              }
         console.log(response.data);
@@ -45,7 +47,7 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-white mb-6">Login</h2>
+        <h2 className="text-2xl font-semibold text-white mb-6">Register Company</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-white mb-2" htmlFor="name">
@@ -77,7 +79,24 @@ const Register = () => {
               required
             />
           </div>
-          
+
+          <div className="mb-4">
+            <label className="block text-white mb-2" htmlFor="companyId">
+              Company ID
+            </label>
+            <input
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-3 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+              type="companyId"
+              id="companyId"
+              name="companyId"
+              value={formData.companyId}
+              onChange={handleInputChange}
+              placeholder="Enter your CompanyId"
+              required
+            />
+          </div>
+
+
           <div className="mb-4">
             <label className="block text-white mb-2" htmlFor="password">
               Password
@@ -104,7 +123,7 @@ const Register = () => {
               value={formData.registrationType}
               onChange={handleInputChange}
             >
-              <option value="user">User</option>
+              <option value="admin">User</option>
             
             </select>
           </div>
@@ -112,7 +131,7 @@ const Register = () => {
             className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Log in
+            Register
           </button>
         </form>
       </div>
@@ -120,4 +139,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterCompany;
