@@ -16,7 +16,7 @@ const ResultPage = () => {
   const callProtectedPage = async () => {
     setLoading(true)
     try {
-      const respose = await fetch('http://localhost:4000/api/v1/protectedCompany', {
+      const respose = await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/protectedCompany`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
