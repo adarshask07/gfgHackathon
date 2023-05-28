@@ -12,7 +12,7 @@ const Home = () => {
   const [loading, setLoading] = React.useState(false);
   
   const callProtectedPage = async () => {
-    setLoading(true)
+    setLoading(false)
     try {
       const respose = await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/protected`, {
       method: 'GET',
