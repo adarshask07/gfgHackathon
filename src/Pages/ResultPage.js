@@ -58,7 +58,7 @@ const ResultPage = () => {
 
   const fetchCardsInfo = async (companyInfo) => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/getLeads', {
+      const response = await axios.get(`${process.env.BASE_URL}/api/v1/getLeads`, {
         params: {
          id : companyInfo.companyId
         },

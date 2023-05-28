@@ -9,6 +9,7 @@ import Button from '../Components/Button';
 
 
 
+
 const ScoreWithCard = () => {
 
     const {setIsCompanyLoggedIn,isCompanyLoggedIn,companyInfo,setCompanyInfo} = useContext(AppContext)
@@ -23,7 +24,7 @@ const ScoreWithCard = () => {
      
          // Replace with the actual com
     
-        axios.get(`http://localhost:4000/api/v1/getLeadsCard?companyId=${companyInfo.companyId}`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/v1/getLeadsCard?companyId=${companyInfo.companyId}`)
           .then(response => {
             const data = response.data;
             setFundLeads(data);
@@ -38,7 +39,7 @@ const ScoreWithCard = () => {
     const callProtectedPage = async () => {
       setLoading(true)
       try {
-        const respose = await fetch('http://localhost:4000/api/v1/protectedCompany', {
+        const respose = await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/protectedCompany`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

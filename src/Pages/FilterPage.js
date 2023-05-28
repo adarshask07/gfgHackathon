@@ -21,7 +21,7 @@ const FilterPage = () => {
 
   const callProtectedPage = async () => {
     try {
-      const respose = await fetch('http://localhost:4000/api/v1/protected', {
+      const respose = await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/protected`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const FilterPage = () => {
       
      
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/getFundFilterData', {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/v1/getFundFilterData`, {
         params: {
           exitLoadRange:exitLoadRange, 
       expenseRatioRange:expenseRatioRange, 
@@ -103,7 +103,8 @@ const FilterPage = () => {
 
 
   return (
-    <div className="bg-gray-900 text-white w-[1350px] mx-auto p-10">
+    <div className="bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600  text-white w-[screen] h-[screen] p-40 ">
+      <div className='w-1/2 bg-white bg-opacity-10 border-white px-20 py-10 rounded-lg mx-auto'>
 
      { (funds.length!==10) &&<div>
      <h1 className="text-4xl font-bold mb-8">Mutual Fund Filter</h1>
@@ -311,6 +312,7 @@ const FilterPage = () => {
                </div>
       
       }
+      </div>
     </div>
   );
 };

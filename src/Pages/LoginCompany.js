@@ -23,7 +23,7 @@ const LoginCompany = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:4000/api/v1/logincompany', formData)
+      .post(`${process.env.REACT_APP_BASE_URL}/api/v1/logincompany`, formData)
       .then((response) => {
         console.log(response.data.user);
         if (response.data.success) {

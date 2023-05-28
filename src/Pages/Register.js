@@ -27,7 +27,7 @@ const Register = () => {
     e.preventDefault();
     console.log(formData)
     axios
-      .post('http://localhost:4000/api/v1/signup', formData)
+      .post(`${process.env.REACT_APP_BASE_URL}/api/v1/signup`, formData)
       .then((response) => {
         
         // Handle successful response

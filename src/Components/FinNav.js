@@ -93,17 +93,7 @@ export default function FinNav() {
         </a>
       </Typography>
     }
-    { isLoggedIn && <Typography
-        as="li"
-        variant="small"
-        color="white"
-        className="p-1 font-normal"
-      >
-        <a href="/UserInput" className="flex items-center">
-          userInput
-        </a>
-      </Typography>
-}
+
       <Typography
         as="li"
         variant="small"

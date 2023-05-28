@@ -14,7 +14,7 @@ const Calculators = () => {
   const callProtectedPage = async () => {
 
     try {
-      const respose = await fetch('http://localhost:4000/api/v1/protected', {
+      const respose = await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/protected`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

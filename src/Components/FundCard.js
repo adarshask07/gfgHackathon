@@ -116,7 +116,7 @@ import {
       console.log(updatedData)
   
       // Send the updated fund score data to the server
-      axios.post('http://localhost:4000/api/v1/createFundScore', updatedData)
+      axios.post(`${process.env.REACT_APP_BASE_URL}/api/v1/createFundScore`, updatedData)
         .then(response => {
           console.log('Fund score updated successfully');
           // Update the fundScores state with the updated data

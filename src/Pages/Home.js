@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { AppContext } from '../Context/AppContext'
 import styles from "../style";
 import "../index.css"
-import {Billing,Business, CardDeal, Clients, CTA, Footer, Navbar, Stats, Testimonials, Hero, FinNav} from '../Components'
+import {Billing,Business, CardDeal, Clients, CTA, Footer, Stats, Testimonials, Hero, } from '../Components'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const Home = () => {
   const callProtectedPage = async () => {
     setLoading(true)
     try {
-      const respose = await fetch('http://localhost:4000/api/v1/protected', {
+      const respose = await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/protected`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
