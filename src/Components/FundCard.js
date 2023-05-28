@@ -210,7 +210,7 @@ import {
               <span className="rounded-full border border-white/20 bg-white/20 p-1">
                 <CheckIcon strokeWidth={2} className="h-3 w-3" />
               </span>
-              <Typography className="font-normal">200+ components</Typography>
+              <Typography className="font-normal">Cagr 1 Year : {fund.cagrOneYear}</Typography>
             </li>
             <li className="flex items-center gap-4">
               <span className="rounded-full border border-white/20 bg-white/20 p-1">
