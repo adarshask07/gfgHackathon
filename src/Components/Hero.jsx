@@ -28,9 +28,7 @@ const Hero = () => {
            Financial Friend
         </h1>
         <p className={`${styles.paragraph} max-w-[470px] text-white mt-5`}>
-          Our team of experts uses a methodology to identify the credit cards
-          most likely to fit your needs. We examine annual percentage rates,
-          annual fees.
+          we help you to choose the mutual fund which is best match for your preferences
         </p>
       </div>
 

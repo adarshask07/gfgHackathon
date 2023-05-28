@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
-import { AppContext } from '../Context/AppContext'
-import styles from "../style";
-import "../index.css"
-import {Billing,Business, CardDeal, Clients, CTA, Footer, Stats, Testimonials, Hero, } from '../Components'
-import { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Billing, Business, CTA, CardDeal, Footer, Hero, Stats, Testimonials } from '../Components';
+import { AppContext } from '../Context/AppContext';
+import "../index.css";
+import styles from "../style";
 
 
 const Home = () => {
@@ -58,7 +57,7 @@ const Home = () => {
   return (
     <div className=" w-full overflow-hidden">
     { loading ? <div className="flex justify-center  text-white text-6xl items-center h-screen">Loading...</div> :
-    <div>
+    <div>    
        <div className={`bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600 ${styles.flexStart}`}>
       
           <div className={`${styles.boxWidth}`}>
@@ -74,7 +73,6 @@ const Home = () => {
             <Billing />
             <CardDeal />
             <Testimonials />
-            <Clients />
             <CTA />
             <Footer />
           </div>
